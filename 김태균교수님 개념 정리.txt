@@ -1,0 +1,290 @@
+김태균 교수님 개념 정리
+
+[[[프로그래밍 기법]]]
+
+프로그래밍작성기법
+1. 일단 막무가내로 사용한다 : 클래스이름과 함수 시그니처를 고안하기 위한 상상력이 필요함.
+2. 사용된 함수 시그니처들을 모아서 클래스의 specification을 정한다 : 
+3. 알고리즘을 수행하기 위한 자료구조를 설계한다 :
+4. 자료구조에 맞춰서 멤버함수 본체를 구현한다.
+
+* 프로그램을 소설 쓰듯이 작성 _빵을 먹는다, 소화시킨다, 출력해본다 -> a.eat(), a.digest(), a.print()..
+
+data definition[변수선언]을 상단에 모아서 하기
+
+specification(명세): 사용자입장에서 반드시 알아야 될 사항(함수이름으로써 사용법을 정의)
+implementation(구현): 공급자가 반드시 알아야 될 사항(함수내용작성)
+*메인함수에서 사용할 함수를 먼저 쓰고, specification을 확정 후, implementation을 수행
+
+aggregation : 부속품을 조합해서 객체를 만드는 것
+
+delegation : 위임
+
+함수를 사용하고 만들기
+
+숫자를 직접적으로 사용하지말기 _static변수로 매크로로 만들어 사용
+
+Exception Handling (-> Defensive Programming)
+-목적: 신뢰성이 높은 프로그램
+*Defensive Programming
+-에러감지, 에러조치
+
+Demeter's Law
+참조자( . ) 을 여러번 쓰지마라
+ex) boxes.get(i).draw();	//collection객체 boxes에서 꺼낸 객체의 클래스의 함수호출
+
+재귀함수 recursive function
+: 가장작은수일떄를 먼저 작성, 그 전에 제일먼저 함수 signiture부터 작성
+n개의 문제
+-> 1개의 문제 + (n-1)개의 문제
+-> n/2개의 문제 + n/2개의 문제
+-memory allocation그릴때 길잃어버리지않게 기록
+(function body안에 있는 함수들 순서대로 번호매기고 스택프레임에서 함수 호출시 호출한 함수에 해당하는 번호쓰기, 해당번호의 함수가 끝나면 지우고 다음 번호 쓰고 )(연필이랑 지우개로)
+
+swap
+x = x ^ y;
+y = x ^ y;
+x = x ^ y;
+
+자바 foreach문법
+:(콜론) 오른쪽엔 collection객체, 해당 collection객체를 모두 travels해라, 순서를 보장할수는 없음
+for (Box pBox : boxes){	//
+	pBox = ~~;
+}
+
+static initializer
+-함수임
+-static data member 초기화시 사용
+-딱 한번 호출됨
+ex) static { ~ 
+}
+
+내가만든 클래스아 라이브러리클래스 중복되는경우 라이브러리클래스 fullname사용
+ex) javax.swing.Box box = javax.swing.Box.createHorizontalBox();
+
+자바 array deep copy함수
+: System.arraycopy();	// argument잇음 찾아보기
+
+Test driver(테스트용 메인프로그램) : 메인함수를 포함하는 클래스가 inner class로 들어간경우(메인프로그램이 존재하는데 내가 만든 클래스 테스트하고싶을때 Test driver를 이용)
+
+Object 클래스 function들
+: toString, object deepcopy함수, reference비교함수, 객체의 type반환함수, 객체내용비교함수(equals()) _override해사용
+
+Dynamic Loading : instantiation할때 string을 class이름으로 사용하는것
+ex)
+String name = "Stack";
+Class class = Class.forName(name);
+Stack s = (Stack)class.newInstance();
+
+아래 두개 서로 다름
+String s;	// null 가리킴
+s = "";	// 빈 스트링을 가리킴
+
+[[[프로그래밍 용어, 개념]]]
+
+구조체: 어떤사물을 표현하고자 할때 그 사물과 밀접한 연관이 있는 데이터들을 묶어서 표현하는 법
+
+자바를 만든이유: 어떤 곳에서도 돌아가게 하기위해(class file을 주면)
+
+c language : source코드 -compile-> 기계어 (다른 컴퓨터에서는 안돌아감)
+java	   : source코드 ->compile-> byte code(서로다른 컴퓨터에서도 돌아감) - interpreter -> 실행결과
+
+data: type, memory allocation scheme, scope
+
+psvm(String[] args) : public 외부에서 실행, static 전역함수, void return값x, String[] args: command line argument_도스창에서 실행시 argument를 받음
+
+static variable :프로그램의 실행이 시작될때 생기고, 종료될때 사라짐(고급c 8주차)
+automatic variable :함수가 호출되고 종료될때 
+dynamic variable: '생겨라'할때
+
+Memory Allocation Scheme(어떤 변수를 위한 기억장소가 언제 할당되고 사라지는가)
+-static allocation : 프로그램실행이 시작되고 종료될때
+-automatic allocation :  함수가 호출될때( 블록에 들어갈때
+-dynamic allocation : 배열을 automatic allocation했을때 overflow문제, memory낭비문제 보완 / garbage collection을 신경써야 함
+
+컴퓨터 메모리
+-code영역, data영역(static area), heap영역, stack영역
+
+call by value(값에 의한 호출) : actual parameter값이 formal parameter에 copy되는 parameter passing 방법
+call by reference(참조에 의한 호출) : actual parameter의 주소를 전달하는 parameter passing 방법
+
+*자세한 차이
+call by address는 주소변수(포인터변수)를 할당하고 주소를 복사해옴
+call by reference는 가리키는 reference이름을 바꿔서 들고오므로 할당되는 메모리가 없음
+
+에러 3종류
+-syntax error
+-link error : 메인메소드에서 함수를 잘못 사용했을때
+-runtime error : 작동정지/엉터리결과
+
+two's complement : 2진수에서 2의 보수 : 1의 보수 + 1
+진수변환:
+1. x값을 8진수나 16진수로 변환하기
+-> 먼저 2진수로 바꾸고 8진수면 3자리, 16진수면 4자리씩 묶어서 변환
+2. 음수 x값을 8진수나 16진수로 변환하기
+-> 먼저 2진수로 바꾸고 1의 보수로 바꾼후 +1 후에 1과 동일
+ex)
+-16진수 0111 1111 11...=> 7 f f ...  //0x7fffffff
+*2진수 4개가 모이면 16진수가 됨
+*사용이유(중요)
+1. -0이 생기는 문제때문에(000000...도 0, 10000000..도 0으로 썼을때 0이 중복됨)
+2. 뺄셈을 덧셈처럼하기위해서
+
+bitwise 
+목적 : 기억장소 절약
+&(and)(bitwise and) : x
+|(or)(bitwise or) : +
+^(xor)(exclusive or)(hat) : 같으면 0, 다르면 1
+~(negation)(tild) : 두개 비교하는게 아니고 그냥 0은 1로, 1은 0으로
+
+Mask: 1 << 3 이런식으로
+
+예약어(modifyers)
+
+volatile : 컴파일시에 optimization하지말라는 의사표현을 위한 reserved word(예약어)
+* 멀티스레드에서 공유되는 데이터멤버에 상호배제를 위해 적어줌
+ex) volatile boolean stopped = false;
+
+to Assembly
+x = x+1;
+=>	
+LOAD 15, x  // 메모리의 x값을, 15번 register에 Load
+ADD 15, =F'1'  // F'1' 는 그냥 대충 1이라는 뜻
+STO 15, x // 15번 register값을, 메모리에 store
+* 하드웨어의 저장공간 : 하드디스크 -> 메모리 -> CPU의 register
+CPU의 register에는 4byte짜리 공간 16개(index 0~15)
+
+toString
+: 어떤 객체의 상태값을 출력하기 위한 함수
+
+final 
+ex) final a1 = a2; 를 못하게 함
+
+자바와 C io
+1. C의 경우 한줄 단위로 받아 처리함
+2. StringTokenize함
+3. atoi로 정수로 변환
+=> 자바, C#에서는 이 방식만 사용
+
+Exception두종류:
+Caught exception : 반드시  try catch해줘야함(Exception을 상속받음)
+Uncaught exception : 필요에 따라(error를 상속)
+
+Boxing : Integer a = 4; 했을때 Integer는 객체고 a는 레퍼런스이므로 =4가 말이 안되는데 
+자동으로 heap영역에 객체를 만들고 data int4를 넣어주는 기능(int변수처럼 사용할수있게해주는기능)
+반대로 꺼낼때: unboxing
+*Generic class에서 이용
+
+Java IO:
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in);
+에서 InputStreamReader(System.in)은 한방울씩
+BufferedRdeader는 통으로 받음
+
+instantiation(인스턴트화) : 객체를 물리적인 어떤 장소에 위치시키는 작업을 통해 인스턴스를 만드는 것 (자바에서 new ~ 로 힙영역에 객체를 할당시키는것)
+
+truncate : Integer 나누기 연산에서 생기는 소수점 이하 버리기
+
+expression : 산술식
+operand : 피연산자 123..
+operator : 연산자 +-*/
+
+API: application programming interface
+ 
+RTTI (run time type indentification)(실행중에 type을 확인)(down casting시)
+-자바 : if(객체 instance of 하위클래스)
+ex) figure instance of Rectangle
+
+String으로 Class를 가져오는 기법 _Dynamic loading
+Class serviceClass = Class.forName("Stack");	// Class라는 클래스의 static function, argument에 클래스이름입력
+뒷 코드내용은 그냥 인터넷검색해보기
+	
+
+hook function : implement부분이 비어있는 함수(하위클래스에 상속받아 오버라이딩)
+ex) void setFill(){}
+abstract function : implemnet부분이 없는 함수(모든 하위클래스에서 구현해야됨, abstract class로 만들어야함)
+ex) abstract void move(int x, int y);
+
+랜덤넘버 seeding?
+
+Serialization(직렬화)
+장치 독립적인 방식으로 데이터를 전송하는 기술
+*Save/Load : 메모리 <-> 하드디스크
+
+static function : 객체와 bound되어있지 않은 전역함수
+memberfunction : 객체와 bound되어있는함수
+
+Binding : 함수호출을 함수정의와 연결하는 행위(함수호출의 주소를 결정하는 행위)
+메인함수에서 함수호출시 그 함수가 있는 주소를 찾아감
+* Dynamic Binding : 그 함수의 주소가 runtime시에 결정됨
+
+toString : 객체의 상태값을 출력하는 함수
+
+Upcasting
+: 하위 객체를 상위 객체처럼 인식하는 기법
+Animal l1 = new Lion("사자1");
+
+재귀함수(recursive function) : 함수정의 내에 함수 호출이 있는 경우
+-무한루프에 빠지지않기 위해 반드시 if가 필요함(boundary condition 경계조건)
+-장점: 작성하기가 쉽고 이해하기가 쉽다
+-단점: 속도가 느리고 기억장소가 커지는 경우가 발생할 수 있음
+*확인하는법 n을 print찍어보기
+
+인터페이스 interface:
+어떤 사물의 다양한 면 혹은 여러 사물들의 공통적인 면을 표현하기 위한 추상화 도구
++interface 어떤 클래스의 사용법을 밝히는용도
+data member 있으면 안되는데 static data member는 있어도됨
+
+객체지향의 네가지 속성
+1. data abstraction(자료추상화)
+어떠한 사물을 정의하고자 할 때 그 사물에 속하는 서로 밀접한 연관이 있는 데이터와 함수를 묶어서 표현하는 제도
+
+2. inheritanace(상속)
+기존에 만들어진 클래스의 자원(데이터멤버/멤버함수)을 물려 받아서 재사용할 수 있는 제도
+
+3. dynamic binding(동적 바인딩)
+함수 호출을 처리하기 위한 바인딩이 runtime시에 이루어지는 제도
+
+4. polymorphism(다형개념)_poly:많다, morphism: 형태
+객체들의 특성이 "서로 다르면서 같은 점" "서로 같으면서 다른 점"을 다루는 제도
+* Polymorphic Contanier : 서로 다른 type의 객체들을 Upcasting해 같은 type의 객체로 만들어 모아놓은 collection 객체 ex) 사자, 토끼, 코끼리들을 동물로 upcating해서 동물 array에 add
+
+
+
+
+
+[[[자료구조]]]
+Colloection 객체: 상자
+ex) 버스는 승객을 담는 colloection객체
+ex) 스택도 collection 객체
+
+Array(배열): 같은타입의 데이터를 모아놓은 collection 객체
+index를 이용해서 access함, data의 물리적인 순서랑 논리적인 순서가 일치함
+
+ArrayList : growable array를 이용해 구현한 collection 객체
+
+Linkedlist란 : 배열의 문제점을 해결하기 위한 collection객체
+배열의 문제점: 
+1. 배열의 크기가 고정되어있다(-1 overflow, -2 기억장소낭비)
+2. 삽입삭제가 비효율적임
+
+Stack: LIFO 방식으로 운영되는 collection 객체
+넣을때는 push함수를 이용하고 뺄 때는 pop함수를 이용합니다
+목적 : 최근 순으로 과거의 역사를 기록하기 위함
+
+Queue: FIFO 방식으로 운영되는 collection 객체
+넣을때는 add함수를 이용하고 뺄 때는 remove함수를 이용합니다(자바)
+(일반적으로 enter, leave)
+
+Deque: 양방향 queue
+인터페이스임, 직접 구현해줘야됨(add, remove 이런거)
+
+Set : 똑같은 data는 중복되게 집어넣지 않는 collection객체
+
+class HashMap<K,V>: sorting을 하지 않고도 search를 빨리 할 수 있게 고안한 collection객체
+데이터가 적을때 사용
+
+Heap : 
+
+priority queue: 우선순위를 가지는 fifo방식으로 운영되는 collection객체
+
+arraylist와 vector 차이: 둘다 growable이지만 arraylist는 단일스레드, vector는 멀티스레드에서 사용
