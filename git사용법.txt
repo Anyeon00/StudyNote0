@@ -1,0 +1,75 @@
+git다운로드
+source머시기 다운로드
+터미널설정
+
+프로젝트 처음 다운받는법
+https://hianna.tistory.com/772
+
+branch생성하기
+https://hianna.tistory.com/776
+---------------------------------------------
+Github repository에 내 프로젝트 업로드 및 연결하기
+1. 초기화
+git init
+2. 추가할 파일 더하기, commit하기
+git add .
+git commit -m "first commit"
+
+4. Github repository랑 내 로컬 프로젝트랑 연결
+git remote add origin https://~~~
+(github 새 repository의 주소 복사해서 붙여넣기)
+5. 연결됐는지 확인
+git remote -v
+
+6. Github로 올리기
+git push origin master
+
+----------------------------------------------
+Github에 계속 업데이트 하기
+git add .
+git commit -m "first commit"
+git push origin master
+
+------------------------------------------------
+Github로 팀 프로젝트 하는법
+1. 프로젝트 다운받기
+인텔리제이의 상단탭 - File - New - Project from Version Controll
+ - 깃허브창에서 해당 프로젝트 주소 복붙 - Clone
+* git remote -v 로 연결되었는지도 확인
+
+2. 내 로컬 브랜치 만들기
+git checkout -b 브랜치이름
+
+3. 내 원격 브랜치에 소스코드 업데이트하기
+git add .
+git commit -m "first commit"
+git push origin 현재로컬브랜치이름
+(이 시점에 로컬 branch의 존재와 변경 내용이 함께 원격 branch로 업데이트됨)
+
+4. Github에서 pull request할지 선택(개인 브랜치의 push후 상태를 다른 branch에 merge하기 _어디에 merge할지 선택가능)
+* 개인브랜치를 타 브랜치(main등)에 merge하고싶으면 이걸로 하는거임
+
+5. 원격 브랜치의 상태를 현재 로컬 브랜치로 가져오기
+git pull origin 원격브랜치이름
+(pull로 가져오기전에 현재상태 commit해야 함)
+
+* 3, 4, 5 반복
+
+* 로컬 브랜치 확인
+git branch
+* 원격 브랜치 확인
+git branch -r
+
+* 로컬 브랜치 삭제
+git branch -d 브랜치이름
+* 원격 브랜치 삭제
+git push origin --delete 브랜치이름
+
+*원격 저장소의 branch 가져오기
+git branch -t origin/원격브랜치이름
+
+*원격 브랜치 병합하기
+Github에서 Pull requests tab - New pull request - 어디서 어디로 병합할지 선택후 병합
+
+*origin
+원격저장소 별명
