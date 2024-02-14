@@ -72,4 +72,4 @@ git branch -t origin/원격브랜치이름
 Github에서 Pull requests tab - New pull request - 어디서 어디로 병합할지 선택후 병합
 
 *origin
-원격저장소 별명
+원격저장소이 ailias
