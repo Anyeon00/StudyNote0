@@ -1,0 +1,91 @@
+[소스 파일 구조]
+메인 실행 파일, 헤더 파일, 헤더 구현 파일
+ex) main.cpp, Stack.h, stack.cpp
+* 헤더 파일의 시작과 끝에 #indef #define #endif 작성 _main.cpp에서 중복으로 여러번 include되는 것을 막기 위함
+* 파일 내 강의자료 참고
+
+
+[automatic allocation & dynamic allocation]
+Stack을 예시로 설명
+automatic allocation으로 구현 시
+- int top, int[] s 둘 다 스택영역에 생성됨
+- 효율적임 (스택프레임과 함께 사라지므로 가비지컬렉션 필요X)
+dynamic allocation으로 구현 시
+- 가비지컬렉션 필요 ex) delete stack;
+- 안정적임 (수정 용이 ex) 위 스택의 배열을 growable array로 변경 가능)
+
+
+[dangling reference]
+dynamic allocation으로 생성된 Stack이 있음
+두개의 reference가 하나의 Stack 메모리를 가리키는 상황
+하나의 reference를 통해 delete함
+-> 실수로 다른 하나의 reference를 통해 또 delete하게 되는 문제가 발생 가능, 이를 dangling reference라고 함
+
+
+[destructor 소멸자]
+delete stack; 시
+Stack이 가리키는 메모리가 제거됨
+Stack의 int []s가 가리키는 메모리는 남아있는 문제 상황
+-> constructor가 존재하듯이 destructor가 존재
+
+Destructor
+- 부속 객체를 자동으로 delete해줌
+- 위 상황처럼 delete stack; 시 Stack이 가리키는 메모리가 제거되기 전에 destructor가 자동 실행됨
+
+Constroucter 작성 ex)
+Stack::Stack() 
+{
+	s = new int[100];
+	top = -1;
+}
+
+Destructor 작성 ex)
+Stack::~Stack()
+{
+	delete s;
+}
+
+
+[Reference Type]
+- 자바의 reference와 다름, C++에만 존재
+
+- aliashing _별명 짓기와 같은 일
+ex)
+int x = 10;
+int &y = x;
+int &z = y;
+// 한 변수에 이름이 x,y,z개가 존재
+// 기억장소가 새로 생기는게 아님 _함수호출로 새 stackframe으로 넘어가는 상황등
+
+- call by reference 용도로 존재함
+C : formal parameter에 포인터를 넘겨주는 방식
+(이건 원래 사실 call by reference가 아니라 call by value임, 주소값을 넘겨주므로)
+C++ : formal parameter에 reference type을 사용하는 방식
+
+-> C보다 편리하게 사용 가능 (C는 포인터를 넘겨줘서 포인터로 작업해야 하는데, C++은 별명을 만들어서 그 별명을 원래 변수처럼 사용하므로)
+ex)
+int a = 1;
+int b = 2;
+
+void swap(int &x, int &y){
+  int tmp;
+  tmp = x;
+  x = y;
+  y = tmp;
+}
+* 강의 자료 참고
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

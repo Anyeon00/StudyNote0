@@ -1,0 +1,37 @@
+//#include <stdio.h>
+#include "Stack.h"
+#include <iostream>
+using namespace std;
+
+void main() 
+{
+	Stack *stack = new Stack();
+
+	stack->push(10);
+	stack->push(20);
+	stack->push(30);
+	int n = stack->pop();
+	stack->push(40);
+
+	cout << stack->size() << endl;
+
+	delete stack;
+
+/*
+	Stack stack;
+	Stack x1;
+	Stack x2;
+
+	stack.push(10);
+	stack.push(20);
+	stack.push(30);
+	int n = stack.pop();
+	stack.push(40);
+
+//	delete stack.s;
+	
+	cout << stack.size() << endl;
+//	printf("Hello world!!!\n");
+//	cout << "Hello world" << endl;
+*/
+}
