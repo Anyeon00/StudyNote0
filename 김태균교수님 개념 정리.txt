@@ -47,7 +47,7 @@ y = x ^ y;
 x = x ^ y;
 
 자바 foreach문법
-:(콜론) 오른쪽엔 collection객체, 해당 collection객체를 모두 travels해라, 순서를 보장할수는 없음
+:(콜론) 오른쪽엔 collection객체, 해당 collection객체를 모두 traverse해라, 순서를 보장할수는 없음
 for (Box pBox : boxes){	//
 	pBox = ~~;
 }
@@ -86,6 +86,11 @@ s = "";	// 빈 스트링을 가리킴
 
 자바를 만든이유: 어떤 곳에서도 돌아가게 하기위해(class file을 주면)
 
+Java : two phase compilation
+javac(컴파일러)실행 -> 바이트코드
+java(인터프리터)실행 -> 출력
+목적 : platform independence
+
 c language : source코드 -compile-> 기계어 (다른 컴퓨터에서는 안돌아감)
 java	   : source코드 ->compile-> byte code(서로다른 컴퓨터에서도 돌아감) - interpreter -> 실행결과
 
@@ -108,9 +113,13 @@ Memory Allocation Scheme(어떤 변수를 위한 기억장소가 언제 할당�
 call by value(값에 의한 호출) : actual parameter값이 formal parameter에 copy되는 parameter passing 방법
 call by reference(참조에 의한 호출) : actual parameter의 주소를 전달하는 parameter passing 방법
 
-*자세한 차이
-call by address는 주소변수(포인터변수)를 할당하고 주소를 복사해옴
-call by reference는 가리키는 reference이름을 바꿔서 들고오므로 할당되는 메모리가 없음
+*자세 설명
+call by value : C, 자바, C#
+- reference를 넘기는게 주소 값을 넘기는 것이므로
+call by reference : C
+- 사실 call by reference가 아님 포인터 값을 넘기므로 call by value (=call by address라고도 함) _새로 할당되는 메모리가 없음
+- 진짜 call by reference는 &로 값을 받는 scan_f에서 사용
+
 
 에러 3종류
 -syntax error
@@ -209,6 +218,8 @@ ex) abstract void move(int x, int y);
 Serialization(직렬화)
 장치 독립적인 방식으로 데이터를 전송하는 기술
 *Save/Load : 메모리 <-> 하드디스크
+*멀티스레드프로그래밍시 스레드 <-> 스레드
+*컴퓨터 <-> 컴퓨터
 
 static function : 객체와 bound되어있지 않은 전역함수
 memberfunction : 객체와 bound되어있는함수
@@ -233,6 +244,9 @@ Animal l1 = new Lion("사자1");
 어떤 사물의 다양한 면 혹은 여러 사물들의 공통적인 면을 표현하기 위한 추상화 도구
 +interface 어떤 클래스의 사용법을 밝히는용도
 data member 있으면 안되는데 static data member는 있어도됨
+
+객체지향이란
+현실세계의 사물을 해석하여 소프트웨어로 개발할 때, 주된 관점을 객체에 두고 이해함
 
 객체지향의 네가지 속성
 1. data abstraction(자료추상화)
