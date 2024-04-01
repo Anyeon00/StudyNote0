@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include "Stack.h"
+
+Stack::Stack() 
+{
+	s = new int[100];
+	top = -1;
+}
+
+Stack::~Stack()
+{
+	printf("HERE\n");
+	delete s;
+}
+
+int Stack::size()
+{
+	return top+1;
+}
+
+int Stack::pop()
+{
+	top--;
+	return s[top+1];
+}
+
+void Stack::push(int x)
+{
+	top++;
+	s[top] = x;
+}

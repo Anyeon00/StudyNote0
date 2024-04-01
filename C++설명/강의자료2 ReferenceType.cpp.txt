@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+/*
+void swap(int *a,int *b)
+{
+	int t;
+
+	t = *a;
+	*a = *b;
+	*b = t;
+}
+*/
+
+void swap(int &a,int &b)
+{
+	int t;
+
+	t = a;
+	a = b;
+	b = t;
+}
+
+void main()
+{
+	/*
+	int x = 10;
+	int &y = x;
+	int &z = y;
+
+	x = 20;
+	y = 30;
+	z = 40;
+
+	printf("%d %d %d\n",x,y,z);
+	*/
+	int x, y;
+
+	x = 10;
+	y = 20;
+
+	swap(x,y);
+
+	printf("%d %d\n",x,y);
+}
