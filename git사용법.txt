@@ -24,6 +24,9 @@ git remote -v
 6. Github로 올리기
 git push origin master
 
+* Github 정책 변경으로 인해 변경점 발생
+- 첫 push 시 로그인 해야함, 이때 비밀번호에 토큰을 입력
+- Github - 우측상단프로필 - Settings - 좌측메뉴 Developer settings - Personal access tokens - Tokens에서 발급
 ----------------------------------------------
 Github에 계속 업데이트 하기
 git add .
@@ -65,11 +68,15 @@ git branch -d 브랜치이름
 * 원격 브랜치 삭제
 git push origin --delete 브랜치이름
 
+* 로컬 브랜치 이동
+git checkout 브랜치이름
+
 *원격 저장소의 branch 가져오기
+git remote update
 git branch -t origin/원격브랜치이름
 
 *원격 브랜치 병합하기
 Github에서 Pull requests tab - New pull request - 어디서 어디로 병합할지 선택후 병합
 
 *origin
-원격저장소의 ailias
+원격저장소 alias
