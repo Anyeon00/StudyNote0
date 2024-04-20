@@ -21,7 +21,7 @@ dynamic allocation으로 구현 시
 dynamic allocation으로 생성된 Stack이 있음
 두개의 reference가 하나의 Stack 메모리를 가리키는 상황
 하나의 reference를 통해 delete함
--> 실수로 다른 하나의 reference를 통해 또 delete하게 되는 문제가 발생 가능, 이를 dangling reference라고 함
+-> 실수로 또 다른 하나의 reference를 통해 또 delete하게 되는 문제가 발생 가능, 이를 dangling reference라고 함
 
 
 [destructor 소멸자]
