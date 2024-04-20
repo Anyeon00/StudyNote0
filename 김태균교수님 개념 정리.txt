@@ -126,6 +126,13 @@ call by reference : C
 -link error : 메인메소드에서 함수를 잘못 사용했을때
 -runtime error : 작동정지/엉터리결과
 
+Exception두종류:
+checked exception : 반드시  try catch해줘야함(Exception을 상속받음)
+unchecked exception : 필요에 따라(error를 상속)
+
+Defensive Programming : 프로그램을 exit()시켜버리는 문제
+-> Exception Handling : 그럭저럭 돌아가게 함, 에러 인식은 공급자가, 에러 처리는 사용자가
+
 two's complement : 2진수에서 2의 보수 : 1의 보수 + 1
 진수변환:
 1. x값을 8진수나 16진수로 변환하기
@@ -174,10 +181,6 @@ ex) final a1 = a2; 를 못하게 함
 2. StringTokenize함
 3. atoi로 정수로 변환
 => 자바, C#에서는 이 방식만 사용
-
-Exception두종류:
-Caught exception : 반드시  try catch해줘야함(Exception을 상속받음)
-Uncaught exception : 필요에 따라(error를 상속)
 
 Boxing : Integer a = 4; 했을때 Integer는 객체고 a는 레퍼런스이므로 =4가 말이 안되는데 
 자동으로 heap영역에 객체를 만들고 data int4를 넣어주는 기능(int변수처럼 사용할수있게해주는기능)
@@ -261,7 +264,7 @@ data member 있으면 안되는데 static data member는 있어도됨
 4. polymorphism(다형개념)_poly:많다, morphism: 형태
 객체들의 특성이 "서로 다르면서 같은 점" "서로 같으면서 다른 점"을 다루는 제도
 * Polymorphic Contanier : 서로 다른 type의 객체들을 Upcasting해 같은 type의 객체로 만들어 모아놓은 collection 객체 ex) 사자, 토끼, 코끼리들을 동물로 upcating해서 동물 array에 add
-
+* Operator overloading
 
 
 
